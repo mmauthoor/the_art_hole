@@ -37,3 +37,5 @@ CREATE TABLE watchers (
 );
 
 INSERT INTO artworks (title, artist, image_url, year, media, description, user_id, watchers) VALUES ('Yoshi', 'Mark Ryden', 'https://miro.medium.com/max/1400/1*g2AcX4IwUcN4kPr2bzDsUQ.jpeg', 2007, 'Oil on canvas', 'A wonderful figure of Ryden''s imagination', 1, 0);
+
+'Little Boy Blue', 'Mark Ryden', 'https://images.squarespace-cdn.com/content/v1/60086a96e344bd2f8788f141/1615425074839-6PZG8KIT2QPNVOJLGVZX/LittleBoyBlue.jpg', 2001, 'Oil on canvas', 'A sinister little boy enjoys riding his tricycle', 1, 0

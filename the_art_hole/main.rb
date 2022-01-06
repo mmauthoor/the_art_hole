@@ -13,7 +13,7 @@ require_relative "models/user.rb"
 
 enable :sessions
 
-
+# Ask DT - is it ok to make your homepage different erbs depending on if logged in or not? 
 get "/" do
   
   # if not logged in, serve up
@@ -21,7 +21,7 @@ get "/" do
   # unless logged in
   # if logged in, provide main gallery
   result = db_query("SELECT * FROM artworks;")
-  # ideally would use openstruct here. Maybe in DB query? 
+  # ideally would use openstruct here. 
   erb(:artworks, locals: {
     artworks: result
   })
@@ -42,10 +42,10 @@ end
 # GET /artworks/:id - show individual artwork
 get "/artworks/:id" do
 
-  artwork = OpenStruct.new(db_query("SELECT * FROM artworks WHERE id = $1;", [params['id']]).first)
+  artwork = db_query("SELECT * FROM artworks WHERE id = $1;", [params['id']]).first
 
   erb(:artwork, locals: {
-    artwork: artwork
+    artwork: OpenStruct.new(artwork)
   })
 
 end
@@ -54,20 +54,26 @@ end
 delete "/artworks/:id" do
   delete_artwork(params["id"])
   
-  # ideally would redirect to user dashboard
+  # ideally would ultimately redirect to user dashboard
   redirect "/"
   
 end
 
 # GET /artworks/:id/edit - form to edit an artwork's details
 get "/artworks/:id/edit" do
+  sql = "SELECT * FROM artworks WHERE id = $1"
+  artwork = db_query(sql, [params["id"]]).first
 
-
+  erb(:edit_artwork, locals: {
+    artwork: OpenStruct.new(artwork)
+  })
 end 
 
 # PUT /artworks/:id - send modified details of an artwork to DB
 put "/artworks/:id" do
+  update_artwork(params["title"], params["artist"], params["image_url"], params["year"], params["media"], params["description"], params["id"])
 
+  redirect "/artworks/#{params["id"]}"
 end
 
 #Users:

@@ -1,0 +1,29 @@
+<h1>Edit listing for <%= artwork.title%> by <%= artwork.artist %> </h1>
+<form action="/artworks/<%= artwork.id %>" method="post">
+    <input type="hidden" name="_method" value="put">
+    <div>
+        <label for="">Title</label>
+        <input type="text" name="title" value="<%= artwork.title %>">
+    </div>
+    <div>
+        <label for="">Artist</label>
+        <input type="text" name="artist" value="<%= artwork.artist %>">
+    </div>
+    <div>
+        <label for="">Artwork file URL</label>
+        <input type="text" name="image_url" value="<%= artwork.image_url %>">
+    </div>
+    <div>
+        <label for="">Year</label>
+        <input type="number" name="year" value="<%= artwork.year %>">
+    </div>
+    <div>
+        <label for="">Media</label>
+        <input type="text" name="media" value="<%= artwork.media %>">
+    </div>    
+    <div>
+        <label for="">Description</label>
+        <input type="text" name="description" value="<%= artwork.description %>">
+    </div>
+    <button>Submit</button>  
+</form>
