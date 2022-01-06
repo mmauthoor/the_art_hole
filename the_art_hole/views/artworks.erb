@@ -1,0 +1,11 @@
+<h1>main gallery</h1>
+
+<main>
+<% artworks.each do | artwork | %>
+    <img src="<%= artwork["image_url"] %>" alt="<%= artwork["name"] %>">
+    <p><%= artwork["title"] %></p>
+    <p><%= artwork["artist"]%>, <%= artwork["year"] %></p>
+
+<% end %>
+
+</main>
