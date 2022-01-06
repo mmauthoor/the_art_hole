@@ -2,7 +2,9 @@
 
 <main>
 <% artworks.each do | artwork | %>
-    <img src="<%= artwork["image_url"] %>" alt="<%= artwork["name"] %>">
+    <a href="/artworks/<%= artwork["id"]%>">
+        <img src="<%= artwork["image_url"] %>" alt="<%= artwork["name"] %>">
+    </a>
     <p><%= artwork["title"] %></p>
     <p><%= artwork["artist"]%>, <%= artwork["year"] %></p>
 

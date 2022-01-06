@@ -10,7 +10,6 @@ require_relative "models/user.rb"
 # Helper methods required:
 # Identify current user
 # Check if logged in
-# CRUD helper methods in models - including database query method
 
 enable :sessions
 
@@ -42,16 +41,27 @@ end
 
 # GET /artworks/:id - show individual artwork
 get "/artworks/:id" do
-  
+
+  artwork = OpenStruct.new(db_query("SELECT * FROM artworks WHERE id = $1;", [params['id']]).first)
+
+  erb(:artwork, locals: {
+    artwork: artwork
+  })
+
 end
 
 # DELETE /artworks/:id - delete individual artwork
 delete "/artworks/:id" do
+  delete_artwork(params["id"])
+  
+  # ideally would redirect to user dashboard
+  redirect "/"
   
 end
 
 # GET /artworks/:id/edit - form to edit an artwork's details
 get "/artworks/:id/edit" do
+
 
 end 
 
