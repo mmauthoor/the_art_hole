@@ -6,6 +6,8 @@ require "pry"
 
 require_relative "models/artwork.rb"
 require_relative "models/user.rb"
+require_relative "models/watcher.rb"
+
 
 enable :sessions
 
@@ -115,7 +117,7 @@ end
 
 # GET /users/:id - show data connected to that user, i.e. listings, watched AW
 get "/users/:id" do
-  redirect "/" unless logged_in? && params["id"] == current_user.id
+  redirect "/users/#{current_user.id}" unless logged_in? && params["id"] == current_user.id
   user_artworks = find_user_artworks(current_user.id)
 
   # then also want to list AW user is watching
@@ -165,10 +167,17 @@ delete "/session" do
 end
 
 # need to add watch to db table
-post "/watch" do
+post "/watchers" do
+  redirect "/login" unless logged_in?
+
+  create_watcher(current_user.id, params["artwork_id"])
+
+  redirect "/artworks/#{params["artwork_id"]}"
   
 end
 
+# on artwork.erb, want to replace watch button with watching - can click and will delete watch. 
+# render all watched in user dashboard
 
 
 

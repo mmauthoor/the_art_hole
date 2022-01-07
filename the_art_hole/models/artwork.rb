@@ -25,4 +25,5 @@ end
 
 
 def find_random_artwork()
+    # need to find a way to display random artwork from artworks table on / route
 end

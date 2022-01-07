@@ -12,9 +12,12 @@
         <% end %>
 
         <%# form here for watchers?  %>
-        <%# <form action="/watchers">
-        </form> %>
-        <%# ideally would be a nice button  %>
+        <form action="/watchers" method="post">
+        <input type="hidden" name="artwork_id" value="<%= artwork.id %>">
+            <button>Watch</button>
+        </form>
+
+        <%# ideally the contact would be a nice button  %>
         <p>Contact upon interest <%= artwork_user_id.email %></p>
 
         <% if session[:user_id] == artwork.user_id%>
@@ -32,9 +35,7 @@
     </div>
 
     <div class="artwork-image">
-
         <img src="<%= artwork.image_url %>" alt="<%= artwork.title %>">
-
     </div>
 
 
