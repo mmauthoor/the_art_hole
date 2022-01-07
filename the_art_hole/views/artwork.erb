@@ -18,14 +18,16 @@
 
 
     <%# if the session user's id matches the aw's user_id, show these fields %>
-    <a href="/artworks/<%= artwork.id %>/edit">Edit listing</a>
-    
-    <form action="/artworks/<%= artwork.id %>" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <input type="hidden" name="id" value="<%= artwork.id %>">
-        <button>Delete listing</button>
-    </form>
+    <% if session[:user_id] == artwork.user_id%>
+        <a href="/artworks/<%= artwork.id %>/edit">Edit listing</a>
+        
+        <form action="/artworks/<%= artwork.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="id" value="<%= artwork.id %>">
+            <button>Delete listing</button>
+        </form>
     <%# ideally would have a mark as sold button here too %>
+    <% end %>
 
 </div>
 

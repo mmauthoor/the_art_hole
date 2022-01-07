@@ -7,6 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<header>
+<%# don't actually think I need the logged in statement here - would need to be logged in to view? %>
+  <% if logged_in? %>
+    <a href="/users/<%= current_user.id %>"><%= current_user.name%></a>
+    <a href="/">The Art Hole</a>
+    <form action="/session" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button>Leave The Art Hole</button>
+    </form>
+  <% end %>
+</header>
 
   <%= yield %>
 

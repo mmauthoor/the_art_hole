@@ -1,0 +1,10 @@
+<%# want to show a user's listings, watched artwork, link to add new artwork, link to update details %>
+
+<h2>Listings</h2>
+<%# need to connect to artworks table and get all artwork with user_id matching current user %>
+
+<h2>Interested</h2>
+<%# need to access watchers table and get all artwork_id with user_id of current user %>
+
+<a href="/artworks/new">Add a listing</a>
+<a href="/users/<%= current_user.id %>">Update profile</a>

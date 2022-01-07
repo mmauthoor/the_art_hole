@@ -8,10 +8,10 @@ def db_query(sql, params = [])
     return result 
 end
 
-def create_artwork(title, artist, image_url, year, media, description, user_id, watchers)
+def create_artwork(title, artist, image_url, year, media, description, user_id)
     # do I even need watchers here? 
-    sql = "INSERT INTO artworks (title, artist, image_url, year, media, description, user_id, watchers) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);"
-    db_query(sql, [title, artist, image_url, year, media, description, user_id, watchers])
+    sql = "INSERT INTO artworks (title, artist, image_url, year, media, description, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7);"
+    db_query(sql, [title, artist, image_url, year, media, description, user_id])
 end
 
 def update_artwork(title, artist, image_url, year, media, description, id)
