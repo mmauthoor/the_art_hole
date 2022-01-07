@@ -1,41 +1,41 @@
 
 <main>
-<div class="artwork-info">
-    <h1><%= artwork.title %></h1>
-    <h2><%= artwork.artist %></h2>
-    <p><%= artwork.year %></p>
-    <p><%= artwork.media %></p>
-    <p><%= artwork.description %></p>
-    <%# why is watchers a string? need to check %>
-    <% if artwork.watchers.to_i > 1%>
-        <p><%= artwork.watchers %> interested clients</p>
-    <% end %>
-
-    <%# form here for watchers?  %>
-    <%# <form action="/watchers">
-    </form> %>
-    <%# contact - provides email of user_id linked to artwork??? %>
-
-
-    <%# if the session user's id matches the aw's user_id, show these fields %>
-    <% if session[:user_id] == artwork.user_id%>
-        <a href="/artworks/<%= artwork.id %>/edit">Edit listing</a>
+    <div class="artwork-info">
+        <h1><%= artwork.title %></h1>
+        <h2><%= artwork.artist %></h2>
+        <p><%= artwork.year %></p>
+        <p><%= artwork.media %></p>
+        <p><%= artwork.description %></p>
         
-        <form action="/artworks/<%= artwork.id %>" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <input type="hidden" name="id" value="<%= artwork.id %>">
-            <button>Delete listing</button>
-        </form>
-    <%# ideally would have a mark as sold button here too %>
-    <% end %>
+        <% if artwork.watchers.to_i > 1%>
+            <p><%= artwork.watchers %> interested clients</p>
+        <% end %>
 
-</div>
+        <%# form here for watchers?  %>
+        <%# <form action="/watchers">
+        </form> %>
+        <%# ideally would be a nice button  %>
+        <p>Contact upon interest <%= artwork_user_id.email %></p>
 
-<div class="artwork-image">
+        <% if session[:user_id] == artwork.user_id%>
+            <a href="/artworks/<%= artwork.id %>/edit">Edit listing</a>
+            
+            <form action="/artworks/<%= artwork.id %>" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="id" value="<%= artwork.id %>">
+                <button>Delete listing</button>
+            </form>
+            
+        <%# ideally would have a mark as sold button here too %>
+        <% end %>
 
-    <img src="<%= artwork.image_url %>" alt="<%= artwork.title %>">
+    </div>
 
-</div>
+    <div class="artwork-image">
+
+        <img src="<%= artwork.image_url %>" alt="<%= artwork.title %>">
+
+    </div>
 
 
 </main>

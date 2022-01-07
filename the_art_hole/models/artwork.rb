@@ -22,3 +22,7 @@ def delete_artwork(id)
     sql = "DELETE FROM artworks WHERE id = $1;"
     db_query(sql, [id])
 end
+
+
+def find_random_artwork()
+end

@@ -14,3 +14,7 @@
     </div>
     <button>Join</button>
 </form>
+
+<% if defined?(message) && message %>
+    A client with this email already exists in this system. <a href="/login">Log in.</a>
+<% end %>

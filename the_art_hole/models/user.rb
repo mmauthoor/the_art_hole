@@ -5,11 +5,6 @@ def create_user(name, email, password_digest)
     db_query(sql, [name, email, password_digest])
 end
 
-def update_user_no_password(name, email, password_digest)
-    # will need to get to re-enter old password and convert to password_digest to validate. If match, then update with new password
-end
-
-# is this function ok? not sure about passwords here. Do we even need the password here? 
 def validate_user(email)
     sql = "SELECT * FROM users WHERE email = $1;"
     result = db_query(sql, [email])
@@ -26,10 +21,14 @@ def find_user_artworks(id)
     return result
 end
 
-def update_user_no_password()
+def update_user_no_password(name, email, id)
+    sql = "UPDATE users SET name = $1, email = $2 WHERE id = $3;"
+    db_query(sql, [name, email, id])
 end
 
-def update_user_with_password()
+def update_user_with_password(name, email, new_password_digest, id)
+    sql = "UPDATE users SET name = $1, email = $2, password_digest = $3 WHERE id = $4;"
+    db_query(sql, [name, email, new_password_digest, id])
 end
 
 # could do a find user watched artworks - fidn all artworks where watcher 
