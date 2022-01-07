@@ -101,11 +101,9 @@ end
 post "/users" do
   # would be better if there was some sign that a user already had an account under that email
   result = validate_user(params["email"])
+  # change to result.any? 
   redirect "/login" unless result.count > 0
-  # if result.count > 0
-  #   redirect "/login" 
-  # end
-
+  
   password_digest = BCrypt::Password.create(params["password"])
   create_user(params["name"], params["email"], password_digest)
   redirect "/login"
@@ -134,27 +132,27 @@ put "/users/:id" do
   redirect "/login" unless logged_in?
  
   if params["password"].strip.empty? || params["new_password"].strip.empty?
-
+    update_user_no_password()
     sql = "UPDATE users SET name = $1, email = $2 WHERE id = $3;"
     db_query(sql, [params["name"], params["email"], params["id"]])
-
-    redirect "/users/#{params["id"]}"
+  else 
+    
+    user = find_user_by_id(params["id"])
+    if BCrypt::Password.new(user["password_digest"]).==(params["password"])
+      new_password_digest = BCrypt::Password.create(params["new_password"])
+      update_user_with_password()
+      sql = "UPDATE users SET name = $1, email = $2, password_digest = $3 WHERE id = $4;"
+      db_query(sql, [params["name"], params["email"], new_password_digest, params["id"]])
+    end
   end
-
-   # if user did type in a new password, password in DB should change to that IF the current password matches
-  user = find_user_by_id(params["id"])
-  # if BCrypt::Password.new(result.first["password_digest"]).==(params["password"])
-
-  # need to leave password as is if not provided
-  
-  # redirect 
+ 
+  redirect "/users/#{params["id"]}"
 end
 
-# check this still works after removing password params from function
 post "/session" do
-  result = validate_user(params["email"])
-  if result.count > 0 && BCrypt::Password.new(result.first["password_digest"]).==(params["password"])
-    session[:user_id] = result.first["id"]
+  user = validate_user(params["email"])
+  if user.any? && BCrypt::Password.new(user.first["password_digest"]).==(params["password"])
+    session[:user_id] = user.first["id"]
     redirect "/"
   else 
     erb(:login)

@@ -26,4 +26,10 @@ def find_user_artworks(id)
     return result
 end
 
+def update_user_no_password()
+end
+
+def update_user_with_password()
+end
+
 # could do a find user watched artworks - fidn all artworks where watcher 
