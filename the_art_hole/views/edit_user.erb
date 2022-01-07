@@ -1,0 +1,23 @@
+<h1>Edit details for <%= user.name%> </h1>
+<form action="/users/<%= user.id %>" method="post">
+    <input type="hidden" name="_method" value="put">
+    <div>
+        <label for="">Name</label>
+        <input type="text" name="name" value="<%= user.name %>">
+    </div>
+    <div>
+        <label for="">Email</label>
+        <p>Note that this email will be provided to members to contact you about your listings.</p>
+        <input type="text" name="email" value="<%= user.email %>">
+    </div>
+    <div>
+        <label for="">Current password</label>
+        <input type="password" name="password">
+    </div>
+    <div>
+        <label for="">New password</label>
+        <input type="password" name="new_password">
+    </div>
+      
+    <button>Submit</button>  
+</form>

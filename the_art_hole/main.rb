@@ -27,7 +27,7 @@ end
 get "/" do
   if logged_in?
     result = db_query("SELECT * FROM artworks;")
-    # ideally would use openstruct on results - maybe in artworks erb? 
+
     erb(:artworks, locals: {
       artworks: result
     })
@@ -49,10 +49,12 @@ post "/artworks" do
 end
 
 get "/artworks/:id" do
-  artwork = db_query("SELECT * FROM artworks WHERE id = $1;", [params['id']]).first
+  redirect "/" unless logged_in?
+  sql = "SELECT * FROM artworks WHERE id = $1;"
+  artwork = OpenStruct.new(db_query(sql, [params['id']]).first)
 
   erb(:artwork, locals: {
-    artwork: OpenStruct.new(artwork)
+    artwork: artwork
   })
 end
 
@@ -63,31 +65,47 @@ delete "/artworks/:id" do
 end
 
 get "/artworks/:id/edit" do
-  sql = "SELECT * FROM artworks WHERE id = $1"
-  artwork = db_query(sql, [params["id"]]).first
+  sql = "SELECT * FROM artworks WHERE id = $1;"
+  artwork = OpenStruct.new(db_query(sql, [params["id"]]).first)
+
+  redirect "/artworks/#{params["id"]}" unless current_user.id == artwork.user_id
 
   erb(:edit_artwork, locals: {
-    artwork: OpenStruct.new(artwork)
+    artwork: artwork
   })
 end 
 
 put "/artworks/:id" do
+  redirect "/login" unless logged_in?
+
   update_artwork(params["title"], params["artist"], params["image_url"], params["year"], params["media"], params["description"], params["id"])
 
   redirect "/artworks/#{params["id"]}"
 end
 
 get "/login" do
+  if logged_in?
+    redirect "/users/#{current_user.id}"
+  end
+
   erb(:login)
 end
 
 get "/users/new" do
+  if logged_in? 
+    redirect "/"
+  end
   erb(:new_user)
 end
 
-# Adding new user to DB
 post "/users" do
-  # need to check if a user's email already exists in the database first - prevent multiple accounts
+  # would be better if there was some sign that a user already had an account under that email
+  result = validate_user(params["email"])
+  redirect "/login" unless result.count > 0
+  # if result.count > 0
+  #   redirect "/login" 
+  # end
+
   password_digest = BCrypt::Password.create(params["password"])
   create_user(params["name"], params["email"], password_digest)
   redirect "/login"
@@ -95,15 +113,46 @@ end
 
 # GET /users/:id - show data connected to that user, i.e. listings, watched AW
 get "/users/:id" do
-  # should only be able to get this if you ARE the user in question - CHECK THIS WORKS
-  
-  redirect "/" unless params["id"] == current_user.id
+  redirect "/" unless logged_in? && params["id"] == current_user.id
+  user_artworks = find_user_artworks(current_user.id)
 
-  erb(:user)
+  # then also want to list AW user is watching
+  erb(:user, locals: {
+    user_artworks: user_artworks
+  })
 end
 
+get "/users/:id/edit" do
+
+  erb(:edit_user, locals: {
+    user: current_user
+  })
+  
+end
+
+put "/users/:id" do
+  redirect "/login" unless logged_in?
+ 
+  if params["password"].strip.empty? || params["new_password"].strip.empty?
+
+    sql = "UPDATE users SET name = $1, email = $2 WHERE id = $3;"
+    db_query(sql, [params["name"], params["email"], params["id"]])
+
+    redirect "/users/#{params["id"]}"
+  end
+
+   # if user did type in a new password, password in DB should change to that IF the current password matches
+  user = find_user_by_id(params["id"])
+  # if BCrypt::Password.new(result.first["password_digest"]).==(params["password"])
+
+  # need to leave password as is if not provided
+  
+  # redirect 
+end
+
+# check this still works after removing password params from function
 post "/session" do
-  result = validate_user(params["email"], params["password"])
+  result = validate_user(params["email"])
   if result.count > 0 && BCrypt::Password.new(result.first["password_digest"]).==(params["password"])
     session[:user_id] = result.first["id"]
     redirect "/"
