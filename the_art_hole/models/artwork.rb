@@ -23,6 +23,12 @@ def delete_artwork(id)
     db_query(sql, [id])
 end
 
+def find_artwork_by_id(id)
+    sql = "SELECT * FROM artworks WHERE id = $1;"
+    artwork = db_query(sql, [id]).first
+    return artwork
+end
+
 # need to test this function
 def find_random_artwork()
     # This query method is slow for very large tables but should be fine for a small table as in this app

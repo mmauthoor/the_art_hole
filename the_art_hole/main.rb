@@ -65,14 +65,12 @@ end
 get "/artworks/:id" do
   redirect "/" unless logged_in?
 
-  sql = "SELECT * FROM artworks WHERE id = $1;"
-  result = db_query(sql, [params['id']])
-
-  if result.none?
+  result = find_artwork_by_id(params["id"])
+  if result.nil?
     redirect "/"
   end
   
-  artwork = OpenStruct.new(result.first)
+  artwork = OpenStruct.new(result)
   artwork_seller = OpenStruct.new(find_user_by_id(artwork.user_id))
   watch_status = find_watcher(current_user.id, params['id'])
 
@@ -94,8 +92,7 @@ end
 get "/artworks/:id/edit" do
   redirect "/" unless logged_in?
 
-  sql = "SELECT * FROM artworks WHERE id = $1;"
-  artwork = OpenStruct.new(db_query(sql, [params["id"]]).first)
+  artwork = OpenStruct.new(find_artwork_by_id(params["id"]))
 
   redirect "/artworks/#{params["id"]}" unless current_user.id == artwork.user_id
 
@@ -107,13 +104,12 @@ end
 put "/artworks/:id" do
   redirect "/login" unless logged_in?
 
-  # if no new img file supplied, use old one
-  if params["image_file"].empty?
-    update_artwork(params["title"], params["artist"], params["orig_image_url"], params["year"], params["media"], params["description"], params["id"])
+  if params["image_file"].nil?
+    artwork = find_artwork_by_id(params["id"])
+
+    update_artwork(params["title"], params["artist"], artwork["image_url"], params["year"], params["media"], params["description"], params["id"])
   else
-    params
     image_file = params["image_file"]["tempfile"]
-    binding.pry
     options = {
       cloud_name: 'dww0xtsd0', 
       api_key: ENV['CLOUDINARY_API_KEY'],
@@ -142,8 +138,8 @@ get "/users/new" do
 end
 
 post "/users" do
-  does_user_exist = validate_user(params["email"])
-  if does_user_exist.none?
+  user = validate_user(params["email"])
+  if user.none?
       password_digest = BCrypt::Password.create(params["password"])
       create_user(params["name"], params["email"], password_digest)
       redirect "/login"
