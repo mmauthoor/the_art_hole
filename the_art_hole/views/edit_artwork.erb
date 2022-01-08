@@ -1,6 +1,6 @@
 <h1>Edit listing for <%= artwork.title%> by <%= artwork.artist %> </h1>
 <form action="/artworks/<%= artwork.id %>" method="post">
-    <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="_method" enctype="multipart/form-data" value="put">
     <div>
         <label for="">Title</label>
         <input type="text" name="title" value="<%= artwork.title %>">
@@ -10,8 +10,11 @@
         <input type="text" name="artist" value="<%= artwork.artist %>">
     </div>
     <div>
-        <label for="">Artwork file URL</label>
-        <input type="text" name="image_url" value="<%= artwork.image_url %>">
+    <%# ideally would be able to change image file or not update the server if not changed %>
+    <%# may need to blank out and redo function unless can work out how to retain original AW link  %>
+        <label for="">Artwork file</label>
+        <input type="file" name="image_file" value="<%= artwork.image_url %>">
+        <img src="<%= artwork.image_url %>" alt="<%= artwork.title %>">
     </div>
     <div>
         <label for="">Year</label>

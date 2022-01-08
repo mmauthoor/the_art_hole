@@ -1,28 +1,40 @@
 
-<h2>Listings</h2>
-<% if user_artworks.any?%>
-    <% user_artworks.each do | user_artwork |%>
-        <%= user_artwork["title"] %>, <%= user_artwork["artist"] %>
-        <a href="/artworks/<%= user_artwork["id"] %>">
-            <img src="<%= user_artwork["image_url"] %>" alt="<%= user_artwork["title"] %>">
-        </a>
-    <% end %>
-<% else %>
-    <p>You have no current listings.</p>
-<% end %>
+<section>
 
-<a href="/artworks/new">Add a listing</a>
-
-<h2>Watching</h2>
-<% if watched_artworks.any? %>
-    <% watched_artworks.each do | watched_artwork |%>
-        <%= watched_artwork["title"] %>, <%= watched_artwork["artist"] %>
-        <a href="/artworks/<%= watched_artwork["id"] %>">
-            <img src="<%= watched_artwork["image_url"] %>" alt="<%= watched_artwork["title"] %>">
-        </a>
+    <h2>Listings</h2>
+    <% if user_artworks.any?%>
+        <% user_artworks.each do | user_artwork |%>
+            <article class="user-artwork-div">
+                <%= user_artwork["title"] %>, <%= user_artwork["artist"] %>
+                <a href="/artworks/<%= user_artwork["id"] %>">
+                    <img src="<%= user_artwork["image_url"] %>" alt="<%= user_artwork["title"] %>">
+                </a>
+            </article>
+        <% end %>
+    <% else %>
+        <p>You have no current listings.</p>
     <% end %>
-<% else %>
-    <p>You are currently not watching any artworks.</p>
-<% end %>
+
+    <a href="/artworks/new">Add a listing</a>
+
+</section>
+
+<section>
+
+    <h2>Watching</h2>
+    <% if watched_artworks.any? %>
+        <% watched_artworks.each do | watched_artwork |%>
+            <article class="watched-artwork-div">
+                <%= watched_artwork["title"] %>, <%= watched_artwork["artist"] %>
+                <a href="/artworks/<%= watched_artwork["id"] %>">
+                    <img src="<%= watched_artwork["image_url"] %>" alt="<%= watched_artwork["title"] %>">
+                </a>
+            </article>
+        <% end %>
+    <% else %>
+        <p>You are currently watching no artworks.</p>
+    <% end %>
+
+</section>
 
 <a href="/users/<%= current_user.id %>/edit">Update profile</a>

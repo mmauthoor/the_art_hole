@@ -1,13 +1,15 @@
 require "sinatra"
+# remove once code finalised
 require "sinatra/reloader"
 require "pg"
 require "bcrypt"
+require "cloudinary"
+# remove once code finalised
 require "pry"
 
 require_relative "models/artwork.rb"
 require_relative "models/user.rb"
 require_relative "models/watcher.rb"
-
 
 enable :sessions
 
@@ -27,10 +29,10 @@ end
 
 get "/" do
   if logged_in?
-    result = db_query("SELECT * FROM artworks;")
+    artworks = db_query("SELECT * FROM artworks;")
 
     erb(:artworks, locals: {
-      artworks: result
+      artworks: artworks
     })
   else
     # not sure if this will work
@@ -46,17 +48,38 @@ end
 post "/artworks" do
   redirect "/login" unless logged_in?
 
-  create_artwork(params["title"], params["artist"], params["image_url"], params["year"], params["media"], params["description"], current_user.id)
-  redirect "/users/#{current_user.id}"
+  if params["image_file"].nil? || params.values.any? {|value| value.empty?}
+    erb(:new_artwork, locals: {
+        message: "Missing parameters"
+      })
+  else  
+    image_file = params["image_file"]["tempfile"]
+    options = {
+      cloud_name: 'dww0xtsd0', 
+      api_key: ENV['CLOUDINARY_API_KEY'],
+      api_secret: ENV['CLOUDINARY_API_SECRET']
+    }
+  
+    image_url = Cloudinary::Uploader.upload(image_file, options)["url"]
+    binding.pry
+    create_artwork(params["title"], params["artist"], image_url, params["year"], params["media"], params["description"], current_user.id)
+  
+    redirect "/users/#{current_user.id}"
+  end  
 end
 
 get "/artworks/:id" do
   redirect "/" unless logged_in?
 
   sql = "SELECT * FROM artworks WHERE id = $1;"
-  artwork = OpenStruct.new(db_query(sql, [params['id']]).first)
-  artwork_seller = OpenStruct.new(find_user_by_id(artwork.user_id))
+  result = db_query(sql, [params['id']])
 
+  if result.none?
+    redirect "/"
+  end
+  
+  artwork = OpenStruct.new(result.first)
+  artwork_seller = OpenStruct.new(find_user_by_id(artwork.user_id))
   watch_status = find_watcher(current_user.id, params['id'])
 
   erb(:artwork, locals: {
@@ -90,6 +113,19 @@ end
 put "/artworks/:id" do
   redirect "/login" unless logged_in?
 
+  # not sure if even should have functionality to edit image
+
+  image_file = params["image_file"]["tempfile"]
+  options = {
+    cloud_name: 'dww0xtsd0', 
+    api_key: ENV['CLOUDINARY_API_KEY'],
+    api_secret: ENV['CLOUDINARY_API_SECRET']
+  }
+
+    # for purpose of app, ideally would crop to square
+  image_url = Cloudinary::Uploader.upload(image_file, options)["url"]
+
+
   update_artwork(params["title"], params["artist"], params["image_url"], params["year"], params["media"], params["description"], params["id"])
 
   redirect "/artworks/#{params["id"]}"
@@ -112,13 +148,16 @@ end
 post "/users" do
   redirect "/" unless logged_in?
 
+  # if all params not provided, provide erb again with message re please fill out full form. else 
+
+  # ideally would have different var name than result
+
   result = validate_user(params["email"])
   if result.none?
     # if all params not provided, provide erb again with message re please fill out full form. else 
       password_digest = BCrypt::Password.create(params["password"])
       create_user(params["name"], params["email"], password_digest)
       redirect "/login"
-    # end
   else 
     erb(:new_user, locals: {
       message: "Username taken"
@@ -129,8 +168,8 @@ end
 get "/users/:id" do
   redirect "/" unless logged_in?
   redirect "/users/#{current_user.id}" unless params["id"] == current_user.id
-  user_artworks = find_user_artworks(current_user.id)
 
+  user_artworks = find_user_artworks(current_user.id)
   watched_artworks = find_watched_artwork(current_user.id)
 
   erb(:user, locals: {
@@ -150,6 +189,8 @@ end
 
 put "/users/:id" do
   redirect "/login" unless logged_in?
+
+  # if user removes email/name completely, form would return that these details are mandatory
  
   if params["password"].strip.empty? || params["new_password"].strip.empty?
     update_user_no_password(params["name"], params["email"], params["id"])
@@ -160,7 +201,6 @@ put "/users/:id" do
       update_user_with_password(params["name"], params["email"], new_password_digest, params["id"])
     end
   end
- 
   redirect "/users/#{params["id"]}"
 end
 
