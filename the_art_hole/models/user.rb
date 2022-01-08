@@ -31,4 +31,3 @@ def update_user_with_password(name, email, new_password_digest, id)
     db_query(sql, [name, email, new_password_digest, id])
 end
 
-# could do a find user watched artworks - fidn all artworks where watcher 

@@ -131,16 +131,18 @@ get "/users/:id" do
   redirect "/users/#{current_user.id}" unless params["id"] == current_user.id
   user_artworks = find_user_artworks(current_user.id)
 
-  # then also want to list AW user is watching
+  watched_artworks = find_watched_artwork(current_user.id)
+
   erb(:user, locals: {
-    user_artworks: user_artworks
+    user_artworks: user_artworks,
+    watched_artworks: watched_artworks
   })
 end
 
 get "/users/:id/edit" do
   redirect "/" unless logged_in?
   redirect "/users/#{current_user.id}/edit" unless params["id"] == current_user.id
-  
+
   erb(:edit_user, locals: {
     user: current_user
   })

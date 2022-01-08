@@ -1,21 +1,28 @@
-<%# want to show a user's listings, watched artwork, link to add new artwork %>
 
 <h2>Listings</h2>
-<% if user_artworks.count == 0 %>
-    <p>You have no current listings.</p>
-<% else %>
+<% if user_artworks.any?%>
     <% user_artworks.each do | user_artwork |%>
         <%= user_artwork["title"] %>, <%= user_artwork["artist"] %>
         <a href="/artworks/<%= user_artwork["id"] %>">
             <img src="<%= user_artwork["image_url"] %>" alt="<%= user_artwork["title"] %>">
         </a>
     <% end %>
+<% else %>
+    <p>You have no current listings.</p>
 <% end %>
 
 <a href="/artworks/new">Add a listing</a>
 
 <h2>Watching</h2>
-<%# <% if  %> %>
-<%# need to access watchers table and get all artwork_id with user_id of current user %>
+<% if watched_artworks.any? %>
+    <% watched_artworks.each do | watched_artwork |%>
+        <%= watched_artwork["title"] %>, <%= watched_artwork["artist"] %>
+        <a href="/artworks/<%= watched_artwork["id"] %>">
+            <img src="<%= watched_artwork["image_url"] %>" alt="<%= watched_artwork["title"] %>">
+        </a>
+    <% end %>
+<% else %>
+    <p>You are currently not watching any artworks.</p>
+<% end %>
 
 <a href="/users/<%= current_user.id %>/edit">Update profile</a>

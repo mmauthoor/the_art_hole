@@ -1,13 +1,3 @@
--- 2-3 tables
--- Artworks
--- columns: title, artist, year, media, notes, id, user_id, watchers???
-
--- Users
--- columns: first name, last name, email, password, id
-
--- Optional??? - watchers
--- columns: id, user_id, artwork_id
-
 CREATE DATABASE thearthole;
 
 CREATE TABLE artworks (
@@ -39,3 +29,6 @@ CREATE TABLE watchers (
 INSERT INTO artworks (title, artist, image_url, year, media, description, user_id, watchers) VALUES ('Yoshi', 'Mark Ryden', 'https://miro.medium.com/max/1400/1*g2AcX4IwUcN4kPr2bzDsUQ.jpeg', 2007, 'Oil on canvas', 'A wonderful figure of Ryden''s imagination', 1, 0);
 
 'Little Boy Blue', 'Mark Ryden', 'https://images.squarespace-cdn.com/content/v1/60086a96e344bd2f8788f141/1615425074839-6PZG8KIT2QPNVOJLGVZX/LittleBoyBlue.jpg', 2001, 'Oil on canvas', 'A sinister little boy enjoys riding his tricycle', 1, 0
+
+
+SELECT artworks.id, artworks.title, artworks.artist, artworks.image_url FROM artworks, watchers WHERE watchers.artwork_id = artworks.id and watchers.user_id = 2;
