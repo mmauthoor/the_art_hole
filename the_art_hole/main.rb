@@ -35,8 +35,14 @@ get "/" do
       artworks: artworks
     })
   else
+
+    featured_artwork = OpenStruct.new(find_random_artwork())
+
     # not sure if this will work
-    erb(:index, :layout => false)
+    erb(:index, :layout => false, 
+    locals: {
+      featured_artwork: featured_artwork
+    })
   end 
 end
 

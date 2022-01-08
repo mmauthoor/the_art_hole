@@ -29,11 +29,10 @@ def find_artwork_by_id(id)
     return artwork
 end
 
-# need to test this function
 def find_random_artwork()
     # This query method is slow for very large tables but should be fine for a small table as in this app
-    random_id = dbquery("SELECT id from artworks ORDER BY random() limit 1;")
+    random_id = db_query("SELECT id from artworks ORDER BY random() limit 1;").first["id"]
     sql = "SELECT * FROM artworks WHERE id = $1"
-    random_artwork = dbquery(sql, [random_id])
+    random_artwork = db_query(sql, [random_id]).first
     return random_artwork
 end
