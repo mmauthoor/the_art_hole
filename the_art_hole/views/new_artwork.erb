@@ -3,23 +3,23 @@
 <form action="/artworks" method="post" enctype="multipart/form-data">
     <div>
         <label for="">Title</label>
-        <input type="text" name="title">
+        <input type="text" name="title" required>
     </div>
     <div>
         <label for="">Artist</label>
-        <input type="text" name="artist">
+        <input type="text" name="artist" required>
     </div>
     <div>
         <label for="">Image file</label>
-        <input type="file" name="image_file">
+        <input type="file" name="image_file" required>
     </div>
     <div>
         <label for="">Year</label>
-        <input type="number" name="year">
+        <input type="number" name="year" required>
     </div>
     <div>
         <label for="">Media</label>
-        <input type="text" name="media">
+        <input type="text" name="media" required>
     </div>
     <div>
         <label for="">Description</label>
@@ -27,9 +27,5 @@
     </div>
 
     <button>Add</button>
-
-    <% if defined?(message) && message %>
-        Please complete all fields before submitting your listing.
-    <% end %>
  
 </form>

@@ -47,25 +47,19 @@ end
 
 post "/artworks" do
   redirect "/login" unless logged_in?
+  
+  image_file = params["image_file"]["tempfile"]
+  options = {
+    cloud_name: 'dww0xtsd0', 
+    api_key: ENV['CLOUDINARY_API_KEY'],
+    api_secret: ENV['CLOUDINARY_API_SECRET']
+  }
 
-  if params["image_file"].nil? || params.values.any? {|value| value.empty?}
-    erb(:new_artwork, locals: {
-        message: "Missing parameters"
-      })
-  else  
-    image_file = params["image_file"]["tempfile"]
-    options = {
-      cloud_name: 'dww0xtsd0', 
-      api_key: ENV['CLOUDINARY_API_KEY'],
-      api_secret: ENV['CLOUDINARY_API_SECRET']
-    }
-  
-    image_url = Cloudinary::Uploader.upload(image_file, options)["url"]
-    binding.pry
-    create_artwork(params["title"], params["artist"], image_url, params["year"], params["media"], params["description"], current_user.id)
-  
-    redirect "/users/#{current_user.id}"
-  end  
+  image_url = Cloudinary::Uploader.upload(image_file, options)["url"]
+
+  create_artwork(params["title"], params["artist"], image_url, params["year"], params["media"], params["description"], current_user.id)
+
+  redirect "/users/#{current_user.id}"
 end
 
 get "/artworks/:id" do
@@ -113,21 +107,23 @@ end
 put "/artworks/:id" do
   redirect "/login" unless logged_in?
 
-  # not sure if even should have functionality to edit image
+  # if no new img file supplied, use old one
+  if params["image_file"].empty?
+    update_artwork(params["title"], params["artist"], params["orig_image_url"], params["year"], params["media"], params["description"], params["id"])
+  else
+    params
+    image_file = params["image_file"]["tempfile"]
+    binding.pry
+    options = {
+      cloud_name: 'dww0xtsd0', 
+      api_key: ENV['CLOUDINARY_API_KEY'],
+      api_secret: ENV['CLOUDINARY_API_SECRET']
+    }
 
-  image_file = params["image_file"]["tempfile"]
-  options = {
-    cloud_name: 'dww0xtsd0', 
-    api_key: ENV['CLOUDINARY_API_KEY'],
-    api_secret: ENV['CLOUDINARY_API_SECRET']
-  }
+    image_url = Cloudinary::Uploader.upload(image_file, options)["url"]
 
-    # for purpose of app, ideally would crop to square
-  image_url = Cloudinary::Uploader.upload(image_file, options)["url"]
-
-
-  update_artwork(params["title"], params["artist"], params["image_url"], params["year"], params["media"], params["description"], params["id"])
-
+    update_artwork(params["title"], params["artist"], image_url, params["year"], params["media"], params["description"], params["id"])
+  end
   redirect "/artworks/#{params["id"]}"
 end
 
@@ -146,21 +142,14 @@ get "/users/new" do
 end
 
 post "/users" do
-  redirect "/" unless logged_in?
-
-  # if all params not provided, provide erb again with message re please fill out full form. else 
-
-  # ideally would have different var name than result
-
-  result = validate_user(params["email"])
-  if result.none?
-    # if all params not provided, provide erb again with message re please fill out full form. else 
+  does_user_exist = validate_user(params["email"])
+  if does_user_exist.none?
       password_digest = BCrypt::Password.create(params["password"])
       create_user(params["name"], params["email"], password_digest)
       redirect "/login"
   else 
     erb(:new_user, locals: {
-      message: "Username taken"
+      message: "User already exists"
     })
   end
 end
@@ -189,8 +178,6 @@ end
 
 put "/users/:id" do
   redirect "/login" unless logged_in?
-
-  # if user removes email/name completely, form would return that these details are mandatory
  
   if params["password"].strip.empty? || params["new_password"].strip.empty?
     update_user_no_password(params["name"], params["email"], params["id"])
@@ -225,7 +212,6 @@ post "/watchers" do
   redirect "/" unless logged_in?
 
   create_watcher(current_user.id, params["artwork_id"])
-
   redirect "/artworks/#{params["artwork_id"]}"
 end
 
@@ -233,7 +219,6 @@ delete "/watchers" do
   redirect "/" unless logged_in?
 
   delete_watcher(current_user.id, params["artwork_id"])
-
   redirect "/artworks/#{params["artwork_id"]}"
 end
 

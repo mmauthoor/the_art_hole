@@ -23,7 +23,11 @@ def delete_artwork(id)
     db_query(sql, [id])
 end
 
-
+# need to test this function
 def find_random_artwork()
-    # need to find a way to display random artwork from artworks table on / route
+    # This query method is slow for very large tables but should be fine for a small table as in this app
+    random_id = dbquery("SELECT id from artworks ORDER BY random() limit 1;")
+    sql = "SELECT * FROM artworks WHERE id = $1"
+    random_artwork = dbquery(sql, [random_id])
+    return random_artwork
 end
