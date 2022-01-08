@@ -11,16 +11,23 @@
             <p><%= artwork.watchers %> interested clients</p>
         <% end %>
 
-        <%# form here for watchers?  %>
-        <form action="/watchers" method="post">
-        <input type="hidden" name="artwork_id" value="<%= artwork.id %>">
-            <button>Watch</button>
-        </form>
+        <% if is_watching.any? %>
+            <form action="/watchers" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="artwork_id" value="<%= artwork.id %>">
+                <button>Watching</button>
+            </form>
+        <% else %>
+            <form action="/watchers" method="post">
+                <input type="hidden" name="artwork_id" value="<%= artwork.id %>">
+                <button>Watch</button>
+            </form>
+        <% end %>
 
         <%# ideally the contact would be a nice button  %>
-        <p>Contact upon interest <%= artwork_user_id.email %></p>
+        <p>Contact upon interest <%= artwork_seller.email %></p>
 
-        <% if session[:user_id] == artwork.user_id%>
+        <% if session[:user_id] == artwork_seller.id %>
             <a href="/artworks/<%= artwork.id %>/edit">Edit listing</a>
             
             <form action="/artworks/<%= artwork.id %>" method="post">

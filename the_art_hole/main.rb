@@ -39,6 +39,7 @@ get "/" do
 end
 
 get "/artworks/new" do
+  redirect "/" unless logged_in?
   erb(:new_artwork)  
 end
 
@@ -51,23 +52,31 @@ end
 
 get "/artworks/:id" do
   redirect "/" unless logged_in?
+
   sql = "SELECT * FROM artworks WHERE id = $1;"
   artwork = OpenStruct.new(db_query(sql, [params['id']]).first)
-  artwork_user_id = OpenStruct.new(find_user_by_id(artwork.user_id))
+  artwork_seller = OpenStruct.new(find_user_by_id(artwork.user_id))
+
+  watch_status = find_watcher(current_user.id, params['id'])
 
   erb(:artwork, locals: {
     artwork: artwork, 
-    artwork_user_id: artwork_user_id
+    artwork_seller: artwork_seller,
+    is_watching: watch_status
   })
 end
 
 delete "/artworks/:id" do
+  redirect "/" unless logged_in?
+
   delete_artwork(params["id"])
   
   redirect "/users/#{current_user.id}"
 end
 
 get "/artworks/:id/edit" do
+  redirect "/" unless logged_in?
+
   sql = "SELECT * FROM artworks WHERE id = $1;"
   artwork = OpenStruct.new(db_query(sql, [params["id"]]).first)
 
@@ -101,6 +110,8 @@ get "/users/new" do
 end
 
 post "/users" do
+  redirect "/" unless logged_in?
+
   result = validate_user(params["email"])
   if result.none?
     # if all params not provided, provide erb again with message re please fill out full form. else 
@@ -115,9 +126,9 @@ post "/users" do
   end
 end
 
-# GET /users/:id - show data connected to that user, i.e. listings, watched AW
 get "/users/:id" do
-  redirect "/users/#{current_user.id}" unless logged_in? && params["id"] == current_user.id
+  redirect "/" unless logged_in?
+  redirect "/users/#{current_user.id}" unless params["id"] == current_user.id
   user_artworks = find_user_artworks(current_user.id)
 
   # then also want to list AW user is watching
@@ -127,7 +138,9 @@ get "/users/:id" do
 end
 
 get "/users/:id/edit" do
+  redirect "/" unless logged_in?
   redirect "/users/#{current_user.id}/edit" unless params["id"] == current_user.id
+  
   erb(:edit_user, locals: {
     user: current_user
   })
@@ -166,18 +179,21 @@ delete "/session" do
   redirect "/"  
 end
 
-# need to add watch to db table
 post "/watchers" do
-  redirect "/login" unless logged_in?
+  redirect "/" unless logged_in?
 
   create_watcher(current_user.id, params["artwork_id"])
 
   redirect "/artworks/#{params["artwork_id"]}"
-  
 end
 
-# on artwork.erb, want to replace watch button with watching - can click and will delete watch. 
-# render all watched in user dashboard
+delete "/watchers" do
+  redirect "/" unless logged_in?
+
+  delete_watcher(current_user.id, params["artwork_id"])
+
+  redirect "/artworks/#{params["artwork_id"]}"
+end
 
 
 
