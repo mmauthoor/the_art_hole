@@ -1,4 +1,4 @@
-<h1>Edit listing for <%= artwork.title%> by <%= artwork.artist %> </h1>
+<h2 class="form-heading">Edit listing for <span class="aw-title"><%= artwork.title%></span> by <%= artwork.artist %> </h2>
 <form action="/artworks/<%= artwork.id %>" method="post" enctype="multipart/form-data">
     <input type="hidden" name="_method" value="put">
     <div>
@@ -24,7 +24,7 @@
     </div>    
     <div>
         <label for="">Description</label>
-        <textarea name="description" id="" cols="30" rows="10" value="<%= artwork.description %>"><%= artwork.description %></textarea>
+        <textarea name="description" id="" cols="45" rows="10" value="<%= artwork.description %>"><%= artwork.description %></textarea>
     </div>
-    <button>Submit</button>  
+    <button class="btn btn-primary form-btn">Submit</button>  
 </form>

@@ -118,6 +118,11 @@ h2.aw-title {
     margin-bottom: 25px; 
 }
 
+.form-heading {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
 h3 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 100;
@@ -160,7 +165,10 @@ img.full-image {
 
 .user-listing-anchor {
     display: inline-block;
+}
 
+.form-btn {
+    margin-top: 0;
 }
 
 label {
