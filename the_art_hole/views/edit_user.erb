@@ -1,4 +1,7 @@
-<h2 class="form-heading">Edit details for <%= user.name%> </h2>
+<h2 class="form-heading">
+    Edit details for <%= user.name%>
+</h2>
+
 <form action="/users/<%= user.id %>" method="post">
     <input type="hidden" name="_method" value="put">
     <div>
@@ -7,7 +10,7 @@
     </div>
     <div>
         <label for="">Email</label>
-        <p>Note that this email will be provided to members to contact you about your listings.</p>
+        <p class="form-info">Note that this email will be provided to members to contact you about your listings.</p>
         <input type="text" name="email" value="<%= user.email %>" required>
     </div>
     <div>

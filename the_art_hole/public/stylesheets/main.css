@@ -4,17 +4,15 @@ body {
 
 header {
     margin-bottom: 25px;
+    background-color: #2c2d25;
 }
 
 .navbar {
-    padding: 6% 0;
+    padding: 2% 0;
     border: 0;
     letter-spacing: 4px;
-    background-color: #2c2d25;
-    max-height: 100px;
     align-content: center;
     text-align: center;
-    margin-bottom: 20px;
 }
 
 .navbar-brand {
@@ -119,8 +117,15 @@ label {
     color: #A0A0A0;
 }
 
+.form-info {
+    font-size: 10pt;
+    margin-top: 5px;
+    font-style: italic;
+}
+
 .form-message {
     color: #cb410b;
+    margin: 5px 0 20px;
 }
 
 h2 {

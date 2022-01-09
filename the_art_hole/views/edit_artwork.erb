@@ -1,4 +1,7 @@
-<h2 class="form-heading">Edit listing for <span class="aw-title"><%= artwork.title%></span> by <%= artwork.artist %> </h2>
+<h2 class="form-heading">
+    Edit listing for <span class="aw-title"><%= artwork.title%></span> by <%= artwork.artist %> 
+</h2>
+
 <form action="/artworks/<%= artwork.id %>" method="post" enctype="multipart/form-data">
     <input type="hidden" name="_method" value="put">
     <div>
