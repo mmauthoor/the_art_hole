@@ -1,1 +1,65 @@
 /* applies to layouts */
+
+header {
+    background-color: #2c2d25;
+    height: 10%;
+    align-content: center;
+    text-align: center;
+}
+
+.navbar {
+    height: 60px;
+    padding: 6% 0;
+    border: 0;
+    letter-spacing: 4px;
+}
+
+.form-group {
+    text-align: center;
+    margin: 10px;
+}
+
+input {
+    display: block;
+    background-color: #F0F0F0;
+    width: 400px;
+    border: none;
+    margin: 10px;
+    padding: 10px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #d25525;
+    text-transform: uppercase;
+    font-size: 14pt;
+    margin: 2% 0;
+    border: none;
+    border-radius: 0;
+    opacity: 0.85;
+    width: 8rem;
+    padding: 10px 0;
+}
+
+.btn-primary:hover {
+    background-color: #2c2d25;
+    color: linen;
+}
+
+footer {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #2c2d25;
+    padding: 6% 0;
+}
+
+footer p {
+    font-family: 'Public Sans', sans-serif;
+    font-size: 12pt;
+    color: linen;
+    letter-spacing: 2px;
+}

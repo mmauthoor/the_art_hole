@@ -15,10 +15,10 @@
 </head>
 <body>
     <div class="bg-image">
-        <div class="mask">
+        <div class="mask ">
             <div class="container d-flex justify-content-center align-items-center ">
                 <div class="row gx-20 overflow-hidden align-items-center">
-                    <div class="col-lg-8">
+                    <div class="col-lg-8 col-12">
                         <main >
                             <h1>The Art Hole</h1>
                             <h2>so highbrow it's lowbrow</h2>
@@ -30,11 +30,11 @@
                             <a class="btn btn-primary" href="/users/new">Join</a>
                         </main>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-12">
                         <aside class="featured-artwork-aside ">
                             <h3>Featured</h3>
                             <img src="<%= featured_artwork.image_url %>" alt="<%= featured_artwork.title %>">
-                            <p><%= featured_artwork.title %></p>
+                            <span class="aw-title-span"><%= featured_artwork.title %></span>
                             <p><%= featured_artwork.artist %></p>
                         </aside>
                     </div>

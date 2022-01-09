@@ -1,15 +1,27 @@
-<form action="/session" method="post">
-<%# Ideally wouldn't have labels, only placeholders? %>
-    <label for="">Email</label>
-    <input type="email" name="email" value="Email address">
 
-    <label for="">Password</label>
-    <input type="password" name="password">
+<main>
+<%# need to center these vertically %>
+    <div class="container flex-column d-flex justify-content-center align-items-center">
+        <div class="flex-column d-flex justify-content-center align-items-center">
+            <form action="/session" method="post">
+                <div class="form-group">
+                <%# Ideally wouldn't have labels, only placeholders? %>
+                    <%# <label for="">Email</label> %>
+                    <input type="email" name="email" placeholder="Email address">
+                </div>
 
-    <button>Enter</button>
+                <div class="form-group">
 
-</form>
+                    <%# <label for="">Password</label> %>
+                    <input type="password" name="password" placeholder="Password">
 
-<% if defined?(message) && message %>
-    <p>Incorrect email or password. Please try again.</p>
-<% end %>
+                    <button class="btn-primary">Enter</button>
+                </div>
+            </form>
+
+            <% if defined?(message) && message %>
+                <p>Incorrect email or password. Please try again.</p>
+            <% end %>
+        </div>
+    </div>
+</main>

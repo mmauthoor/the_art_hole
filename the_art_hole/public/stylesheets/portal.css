@@ -4,6 +4,9 @@
     height: 100%
 } */
 
+/* need to stop aside sticking to top of viewport */
+/* work on responsiveness */
+
 .bg-image {
     background-image: url("../images/portal-background.webp");
     height: 100vh;
@@ -15,13 +18,11 @@
 .mask {
     background-color: rgba(0, 0, 0, 0.4);
     height: 100vh;
-
 }
 
 .container {
     color: linen
 }
-
 
 main {
     padding: 10%;
@@ -55,14 +56,21 @@ h2 {
 
 .btn-primary:hover {
     background-color: linen;
-    color: #000;
+    color: #2c2d25;
 }
 
 .featured-artwork-aside {
-    background-color: #2b201f;
+    background-color: #2c2d25;
     padding: 1em;
+    text-align: center;
+    font-family: 'Public Sans', sans-serif;
 }
 
 .featured-artwork-aside img {
     width: 100%;
+    margin: 10% 0 ;
+}
+
+.aw-title-span {
+    font-style: italic;
 }
