@@ -1,8 +1,8 @@
 
-<main>
-    <div class="artwork-info">
-        <h1><%= artwork.title %></h1>
-        <h2><%= artwork.artist %></h2>
+<div class="row gx-5">
+    <div class="artwork-info col-lg-6 col-md-12">
+        <h2 class="aw-title"><%= artwork.title %></h2>
+        <h3><%= artwork.artist %></h3>
         <p><%= artwork.year %></p>
         <p><%= artwork.media %></p>
         <p><%= artwork.description %></p>
@@ -24,24 +24,31 @@
             </form>
         <% end %>
 
-        <%# ideally the contact would be a nice button  %>
-        <p>Contact upon interest <%= artwork_seller.email %></p>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContact" aria-expanded="false" aria-controls="collapseContact">
+            Contact
+        </button>
+        <div class="collapse" id="collapseContact">
+            <div class="card card-body">
+            <p><%= artwork_seller.email %></p>
+            </div>
+        </div>
 
         <% if session[:user_id] == artwork_seller.id %>
-            <a href="/artworks/<%= artwork.id %>/edit">Edit listing</a>
-            
-            <form action="/artworks/<%= artwork.id %>" method="post">
-                <input type="hidden" name="_method" value="delete">
-                <input type="hidden" name="id" value="<%= artwork.id %>">
-                <button>Delete listing</button>
-            </form>
-            
+            <div class="user-listing-actions">
+                <a class="user-listing-anchor" href="/artworks/<%= artwork.id %>/edit">Edit listing</a>
+                
+                <form action="/artworks/<%= artwork.id %>" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="id" value="<%= artwork.id %>">
+                    <button class="btn btn-primary">Delete listing</button>
+                </form>
+            </div>
         <% end %>
 
     </div>
 
-    <div class="artwork-image">
-        <img src="<%= artwork.image_url %>" alt="<%= artwork.title %>">
+    <div class="col-lg-6 col-md-12">
+        <img class="full-image" src="<%= artwork.image_url %>" alt="<%= artwork.title %>">
     </div>
 
 

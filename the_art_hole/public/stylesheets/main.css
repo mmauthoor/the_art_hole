@@ -4,7 +4,6 @@ body {
 
 header {
     margin-bottom: 25px;
-    
 }
 
 .navbar {
@@ -76,12 +75,18 @@ form {
     text-align: center;
 }
 
+.artwork-info>form, .user-listing-actions>form {
+    text-align: left;
+    display: inline-block;
+    margin: 10px;
+}
+
 input {
     display: block;
     background-color: #F0F0F0;
     width: 400px;
     border: none;
-    margin: 40px auto;
+    margin: 5px auto 40px;
     padding: 10px;
     text-align: center;
 }
@@ -109,17 +114,31 @@ h2 {
     font-weight: 100;
 }
 
+h2.aw-title {
+    margin-bottom: 25px; 
+}
+
+h3 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
+    font-size: 16pt;
+}
+
 img {
     width: 400px;
     height: 400px;
     object-fit: cover;
 }
 
+img.full-image {
+    width: 100%;
+}
+
 .aw-title {
     font-style: italic;
 }
 
-.user-db-anchor {
+.user-db-anchor, .user-listing-anchor {
     display: block;
     text-decoration: none;
     color: linen;
@@ -139,6 +158,23 @@ img {
     opacity: 1;
 }
 
+.user-listing-anchor {
+    display: inline-block;
+
+}
+
+label {
+    color: #A0A0A0;
+}
+
+textarea {
+    display: block;
+    border: none;
+    background-color: #F0F0F0;
+    margin: 10px auto 40px;
+    padding: 10px;
+}
+
 footer {
     text-align: center;
     width: 100%;
@@ -146,7 +182,6 @@ footer {
     background-color: #2c2d25;
     padding: 4% 0;
     margin-top: 30px;
-
 }
 
 footer p {

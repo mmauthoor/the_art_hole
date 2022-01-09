@@ -1,15 +1,15 @@
 /* only applies to entry portal */
 
-/* body, html {
-    height: 100%
-} */
+body {
+    min-height: 100vh;
+}
 
 /* need to stop aside sticking to top of viewport */
 /* work on responsiveness */
 
 .bg-image {
     background-image: url("../images/portal-background.webp");
-    height: 100vh;
+    min-height: 100vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -67,9 +67,15 @@ h2 {
     font-family: 'Public Sans', sans-serif;
 }
 
-.featured-artwork-aside img {
+/* .featured-artwork-aside img {
     width: 100%;
     margin: 10% 0 ;
+} */
+
+img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
 }
 
 .aw-title {
