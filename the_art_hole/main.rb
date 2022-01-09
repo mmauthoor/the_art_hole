@@ -32,7 +32,8 @@ get "/" do
     artworks = db_query("SELECT * FROM artworks;")
 
     erb(:artworks, locals: {
-      artworks: artworks
+      artworks: artworks, 
+      header: "Main Gallery"
     })
   else
 

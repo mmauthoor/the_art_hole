@@ -15,12 +15,12 @@
             <form action="/watchers" method="post">
                 <input type="hidden" name="_method" value="delete">
                 <input type="hidden" name="artwork_id" value="<%= artwork.id %>">
-                <button>Watching</button>
+                <button class="btn btn-primary">Watching</button>
             </form>
         <% else %>
             <form action="/watchers" method="post">
                 <input type="hidden" name="artwork_id" value="<%= artwork.id %>">
-                <button>Watch</button>
+                <button class="btn btn-primary">Watch</button>
             </form>
         <% end %>
 
@@ -36,7 +36,6 @@
                 <button>Delete listing</button>
             </form>
             
-        <%# ideally would have a mark as sold button here too %>
         <% end %>
 
     </div>

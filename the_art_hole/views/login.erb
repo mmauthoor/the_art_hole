@@ -5,7 +5,7 @@
         <div class="flex-column d-flex justify-content-center align-items-center">
             <form action="/session" method="post">
                 <div class="form-group">
-                <%# Ideally wouldn't have labels, only placeholders? %>
+                    <%# Ideally wouldn't have labels, only placeholders? %>
                     <%# <label for="">Email</label> %>
                     <input type="email" name="email" placeholder="Email address">
                 </div>
@@ -15,8 +15,9 @@
                     <%# <label for="">Password</label> %>
                     <input type="password" name="password" placeholder="Password">
 
-                    <button class="btn-primary">Enter</button>
                 </div>
+                <button class="btn btn-primary">Enter</button>
+
             </form>
 
             <% if defined?(message) && message %>
