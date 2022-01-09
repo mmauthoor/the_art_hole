@@ -42,6 +42,7 @@ header {
     border: none;
 }
 
+/* Main gallery */
 .carousel {
     width: 75%;
     height: 500px;
@@ -78,7 +79,7 @@ form {
 .artwork-info>form, .user-listing-actions>form {
     text-align: left;
     display: inline-block;
-    margin: 10px;
+    margin: 10px 10px 10px 0;
 }
 
 input {
@@ -109,6 +110,19 @@ input {
     opacity: 1;
 }
 
+.form-heading {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+label {
+    color: #A0A0A0;
+}
+
+.form-message {
+    color: #cb410b;
+}
+
 h2 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 100;
@@ -116,11 +130,6 @@ h2 {
 
 h2.aw-title {
     margin-bottom: 25px; 
-}
-
-.form-heading {
-    text-align: center;
-    margin-bottom: 25px;
 }
 
 h3 {
@@ -143,7 +152,7 @@ img.full-image {
     font-style: italic;
 }
 
-.user-db-anchor, .user-listing-anchor {
+.user-dashboard-anchor, .user-listing-anchor {
     display: block;
     text-decoration: none;
     color: linen;
@@ -157,7 +166,7 @@ img.full-image {
     text-align: center;
 }
 
-.user-db-anchor:hover {
+.user-dashboard-anchor:hover {
     background-color: #cb410b;
     color: linen;
     opacity: 1;
@@ -171,9 +180,16 @@ img.full-image {
     margin-top: 0;
 }
 
-label {
-    color: #A0A0A0;
+.watching-btn {
+    background-color: #195953;
+    margin-left: 0;
 }
+
+.watch-btn:hover {
+    background-color: #195953;
+}
+
+
 
 textarea {
     display: block;

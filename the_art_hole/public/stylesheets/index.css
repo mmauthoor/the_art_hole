@@ -1,11 +1,6 @@
-/* only applies to entry portal */
-
 body {
     min-height: 100vh;
 }
-
-/* need to stop aside sticking to top of viewport */
-/* work on responsiveness */
 
 .bg-image {
     background-image: url("../images/portal-background.webp");
@@ -16,12 +11,8 @@ body {
 }
 
 .mask {
-    background-color: rgba(0, 0, 0, 0.4);
-    height: 100vh;
-}
-
-.container {
-    color: linen
+    background-color: rgba(0, 0, 0, 0.6);
+    min-height: 100vh;
 }
 
 main {
@@ -32,22 +23,31 @@ h1 {
     font-family: 'Public Sans', sans-serif;
     font-size: 80pt;
     font-weight: 100;
+    color: linen;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
 }
 
 h2 {
     font-family: 'Public Sans', sans-serif;
     font-size: 20pt;
+    color: rgba(233, 220, 201, 0.7);
+    margin: 10px 0 5px;
 }
 
 .right-aligned-txt {
     text-align: right;
 }
 
+.enter-site-btns {
+    text-align: center;
+}
+
 .btn-primary {
     background-color: #d25525;
     text-transform: uppercase;
     font-size: 14pt;
-    margin: 5% 10% 5% 0;
+    margin: 7% 10% 5% 0;
     border: none;
     border-radius: 0;
     opacity: 0.85;
@@ -61,21 +61,25 @@ h2 {
 }
 
 .featured-artwork-aside {
-    background-color: #2c2d25;
+    background-color: rgba(27, 18, 18, 0.4);
+    color: linen;
     padding: 1em;
     text-align: center;
     font-family: 'Public Sans', sans-serif;
 }
 
-/* .featured-artwork-aside img {
-    width: 100%;
-    margin: 10% 0 ;
-} */
+.featured-artwork-aside p {
+    font-family: 'Public Sans', sans-serif;
+    color: linen;
+    margin: 2px;
+    font-size: 14pt;
+}
 
 img {
-    width: 400px;
-    height: 400px;
+    width: 100%;
+    max-height: 400px;
     object-fit: cover;
+    margin: 20px 0;
 }
 
 .aw-title {

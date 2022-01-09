@@ -10,28 +10,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Public+Sans:wght@100&display=swap" rel="stylesheet">
 
-    <link rel='stylesheet' href='/stylesheets/portal.css'>
-
+    <link rel='stylesheet' href='/stylesheets/index.css'>
 </head>
-<%# need to check tags ok on this body %>
+
 <body class="d-flex flex-column min-bh-100">
     <div class="bg-image">
-        <div class="mask">
-            <div class="container d-flex justify-content-center align-items-center ">
-                <div class="row gx-20 overflow-hidden align-items-center">
-                    <div class="col-lg-8 col-md-12">
+        <div class="mask d-flex justify-content-center align-items-center">
+            <div class="container">
+                <div class="row d-flex gx-5 align-items-center h-100">
+                    <div class="col-xl-8 col-md-12">
                         <main >
                             <h1>The Art Hole</h1>
                             <h2>so highbrow it's lowbrow</h2>
                             <span class="right-aligned-txt">
                                 <h2>so lowbrow it's highbrow</h2>
                             </span>
-
-                            <a class="btn btn-primary" href="/login">Enter</a>
-                            <a class="btn btn-primary" href="/users/new">Join</a>
+                            <div class="enter-site-btns">
+                                <a class="btn btn-primary" href="/login">Enter</a>
+                                <a class="btn btn-primary" href="/users/new">Join</a>
+                            </div>
                         </main>
                     </div>
-                    <div class="col-lg-4 col-md-12">
+                    <div class="col-xl-4 col-md-8 col-sm-12">
                         <aside class="featured-artwork-aside ">
                             <h3>Featured</h3>
                             <img src="<%= featured_artwork.image_url %>" alt="<%= featured_artwork.title %>">
