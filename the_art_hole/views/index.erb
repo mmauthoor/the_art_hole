@@ -13,7 +13,8 @@
     <link rel='stylesheet' href='/stylesheets/portal.css'>
 
 </head>
-<body>
+<%# need to check tags ok on this body %>
+<body class="d-flex flex-column min-bh-100">
     <div class="bg-image">
         <div class="mask ">
             <div class="container d-flex justify-content-center align-items-center ">
@@ -34,7 +35,7 @@
                         <aside class="featured-artwork-aside ">
                             <h3>Featured</h3>
                             <img src="<%= featured_artwork.image_url %>" alt="<%= featured_artwork.title %>">
-                            <span class="aw-title-span"><%= featured_artwork.title %></span>
+                            <p class="aw-title"><%= featured_artwork.title %></p>
                             <p><%= featured_artwork.artist %></p>
                         </aside>
                     </div>
