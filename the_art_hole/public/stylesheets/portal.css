@@ -1,0 +1,68 @@
+/* only applies to entry portal */
+
+/* body, html {
+    height: 100%
+} */
+
+.bg-image {
+    background-image: url("../images/portal-background.webp");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.mask {
+    background-color: rgba(0, 0, 0, 0.4);
+    height: 100vh;
+
+}
+
+.container {
+    color: linen
+}
+
+
+main {
+    padding: 10%;
+}
+
+h1 {
+    font-family: 'Public Sans', sans-serif;
+    font-size: 80pt;
+}
+
+h2 {
+    font-family: 'Public Sans', sans-serif;
+    font-size: 20pt;
+}
+
+.right-aligned-txt {
+    text-align: right;
+}
+
+.btn-primary {
+    background-color: #d25525;
+    text-transform: uppercase;
+    font-size: 14pt;
+    margin: 5% 10% 5% 0;
+    border: none;
+    border-radius: 0;
+    opacity: 0.85;
+    width: 8rem;
+    padding: 10px 0;
+}
+
+.btn-primary:hover {
+    background-color: linen;
+    color: #000;
+}
+
+.featured-artwork-aside {
+    background-color: #2b201f;
+    padding: 1em;
+}
+
+.featured-artwork-aside img {
+    width: 100%;
+}

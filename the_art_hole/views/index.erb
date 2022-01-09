@@ -1,15 +1,53 @@
-<main>
-    <h1>The Art Hole</h1>
-    <h2>so highbrow it's lowbrow</h2>
-    <h2>so lowbrow it's highbrow</h2>
-    
-    <a href="/login">Enter</a>
-    <a href="/users/new">Join</a>
-</main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Public+Sans:wght@100&display=swap" rel="stylesheet">
 
-<aside>
-    <h3>Featured</h3>
-    <img src="<%= featured_artwork.image_url %>" alt="<%= featured_artwork.title %>">
-    <p><%= featured_artwork.title %></p>
-    <p><%= featured_artwork.artist %></p>
-</aside>
+    <link rel='stylesheet' href='/stylesheets/portal.css'>
+
+</head>
+<body>
+    <div class="bg-image">
+        <div class="mask">
+            <div class="container d-flex justify-content-center align-items-center ">
+                <div class="row gx-20 overflow-hidden align-items-center">
+                    <div class="col-lg-8">
+                        <main >
+                            <h1>The Art Hole</h1>
+                            <h2>so highbrow it's lowbrow</h2>
+                            <span class="right-aligned-txt">
+                                <h2>so lowbrow it's highbrow</h2>
+                            </span>
+
+                            <a class="btn btn-primary" href="/login">Enter</a>
+                            <a class="btn btn-primary" href="/users/new">Join</a>
+                        </main>
+                    </div>
+                    <div class="col-lg-4">
+                        <aside class="featured-artwork-aside ">
+                            <h3>Featured</h3>
+                            <img src="<%= featured_artwork.image_url %>" alt="<%= featured_artwork.title %>">
+                            <p><%= featured_artwork.title %></p>
+                            <p><%= featured_artwork.artist %></p>
+                        </aside>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+
+
