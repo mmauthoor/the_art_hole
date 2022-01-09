@@ -1,44 +1,42 @@
 
-
-<div class="row">
-    <div>
+<div class="row gx-5 user-dashboard">
+    <div class="col-lg-5 col-md-12">
         <section>
             <h2>Listings</h2>
             <% if user_artworks.any?%>
                 <% user_artworks.each do | user_artwork |%>
-                    <article class="user-artwork-div">
-                        <%= user_artwork["title"] %>, <%= user_artwork["artist"] %>
+                    <article class="user-aw-listing">
+                        <p><span class="aw-title"><%= user_artwork["title"] %></span>, <%= user_artwork["artist"] %></p>
                         <a href="/artworks/<%= user_artwork["id"] %>">
-                            <img src="<%= user_artwork["image_url"] %>" alt="<%= user_artwork["title"] %>">
+                            <img class= "w-100 shadow-1-strong rounded mb-4" src="<%= user_artwork["image_url"] %>" alt="<%= user_artwork["title"] %>">
                         </a>
                     </article>
                 <% end %>
             <% else %>
                 <p>You have no current listings.</p>
             <% end %>
-
-            <a href="/artworks/new">Add a listing</a>
+        </section>
+    </div>
+    <div class="col-lg-5 col-md-12">
+        <section>
+            <h2>Watching</h2>
+            <% if watched_artworks.any? %>
+                <% watched_artworks.each do | watched_artwork |%>
+                    <article class="watched-aw">
+                        <p><span class="aw-title"><%= watched_artwork["title"] %></span>, <%= watched_artwork["artist"] %></p>
+                        <a href="/artworks/<%= watched_artwork["id"] %>">
+                            <img class= "w-100 shadow-1-strong rounded mb-4" src="<%= watched_artwork["image_url"] %>" alt="<%= watched_artwork["title"] %>">
+                        </a>
+                    </article>
+                <% end %>
+            <% else %>
+                <p>You currently have no watched pieces.</p>
+            <% end %>
 
         </section>
     </div>
-    <section>
-
-        <h2>Watching</h2>
-        <% if watched_artworks.any? %>
-            <% watched_artworks.each do | watched_artwork |%>
-                <article class="watched-artwork-div">
-                    <%= watched_artwork["title"] %>, <%= watched_artwork["artist"] %>
-                    <a href="/artworks/<%= watched_artwork["id"] %>">
-                        <img src="<%= watched_artwork["image_url"] %>" alt="<%= watched_artwork["title"] %>">
-                    </a>
-                </article>
-            <% end %>
-        <% else %>
-            <p>You are currently watching no artworks.</p>
-        <% end %>
-
-    </section>
-
-    <a href="/users/<%= current_user.id %>/edit">Update profile</a>
-
+    <div class="col-lg-2 col-md-12">
+        <a class="user-db-anchor" href="/artworks/new">Add a listing</a>
+        <a class="user-db-anchor" href="/users/<%= current_user.id %>/edit">Update profile</a>
+    </div>
 </div>
