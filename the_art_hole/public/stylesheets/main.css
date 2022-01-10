@@ -65,6 +65,7 @@ header {
     font-weight: 100;
 }
 
+/* Forms and buttons */
 .form-group {
     text-align: center;
     margin: 10px;
@@ -128,6 +129,76 @@ label {
     margin: 5px 0 20px;
 }
 
+.user-dashboard-anchor {
+    display: block;
+    text-decoration: none;
+    color: linen;
+    background-color: #d25525;
+    text-transform: uppercase;
+    font-size: 12pt;
+    margin: 10% 0;
+    opacity: 0.85;
+    width: 10rem;
+    padding: 10px;
+    text-align: center;
+}
+
+.user-dashboard-anchor:hover {
+    background-color: #cb410b;
+    color: linen;
+    opacity: 1;
+}
+
+.watching-btn {
+    background-color: #195953;
+    margin-left: 0;
+}
+
+.watch-btn:hover {
+    background-color: #195953;
+}
+
+.edit-listing-anchor {
+    display: inline-block;
+    text-decoration: none;
+    color: linen;
+    background-color: #811331;
+    text-transform: uppercase;
+    opacity: 0.85;
+    width: 10rem;
+    padding: 10px;
+    text-align: center;
+    margin: 4% 0;
+    font-size: 14pt;
+}
+
+.edit-listing-anchor:hover, .delete-btn:hover {
+    color: linen;
+    background-color: #550c20;
+}
+
+.user-listing-options form {
+    text-align: left;
+}
+
+.delete-btn {
+    width: 12rem;
+    background-color: #811331;
+}
+
+
+
+textarea {
+    display: block;
+    border: none;
+    background-color: #F0F0F0;
+    margin: 10px auto 40px;
+    padding: 10px;
+}
+
+
+
+/* General elements */
 h2 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 100;
@@ -155,53 +226,6 @@ img.full-image {
 
 .aw-title {
     font-style: italic;
-}
-
-.user-dashboard-anchor, .user-listing-anchor {
-    display: block;
-    text-decoration: none;
-    color: linen;
-    background-color: #d25525;
-    text-transform: uppercase;
-    font-size: 12pt;
-    margin: 10% 0;
-    opacity: 0.85;
-    width: 10rem;
-    padding: 10px;
-    text-align: center;
-}
-
-.user-dashboard-anchor:hover {
-    background-color: #cb410b;
-    color: linen;
-    opacity: 1;
-}
-
-.user-listing-anchor {
-    display: inline-block;
-}
-
-.form-btn {
-    margin-top: 0;
-}
-
-.watching-btn {
-    background-color: #195953;
-    margin-left: 0;
-}
-
-.watch-btn:hover {
-    background-color: #195953;
-}
-
-
-
-textarea {
-    display: block;
-    border: none;
-    background-color: #F0F0F0;
-    margin: 10px auto 40px;
-    padding: 10px;
 }
 
 footer {

@@ -34,13 +34,13 @@
         </div>
 
         <% if session[:user_id] == artwork_seller.id %>
-            <div class="user-listing-actions">
-                <a class="user-listing-anchor" href="/artworks/<%= artwork.id %>/edit">Edit listing</a>
+            <div class="user-listing-options">
+                <a class="edit-listing-anchor" href="/artworks/<%= artwork.id %>/edit">Edit listing</a>
                 
                 <form action="/artworks/<%= artwork.id %>" method="post">
                     <input type="hidden" name="_method" value="delete">
                     <input type="hidden" name="id" value="<%= artwork.id %>">
-                    <button class="btn btn-primary">Delete listing</button>
+                    <button class="btn btn-primary delete-btn">Delete listing</button>
                 </form>
             </div>
         <% end %>
