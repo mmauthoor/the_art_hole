@@ -18,3 +18,9 @@ def find_watched_artwork(user_id)
     sql = "SELECT artworks.id, artworks.title, artworks.artist, artworks.image_url FROM artworks, watchers WHERE watchers.artwork_id = artworks.id and watchers.user_id = $1;"
     db_query(sql, [user_id])
 end
+
+def get_watcher_count(artwork_id)
+    sql = "SELECT * FROM watchers WHERE artwork_id = $1;"
+    result = db_query(sql, [artwork_id])
+    return result.count    
+end

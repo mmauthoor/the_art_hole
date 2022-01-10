@@ -7,8 +7,8 @@
         <p><%= artwork.media %></p>
         <p><%= artwork.description %></p>
         
-        <% if artwork.watchers.to_i > 1%>
-            <p><%= artwork.watchers %> interested clients</p>
+        <% if watcher_number.to_i > 1%>
+            <p class="watcher-count-text"><%= watcher_number %> interested clients</p>
         <% end %>
 
         <% if is_watching.any? %>

@@ -2,8 +2,12 @@ body {
     min-height: 100vh;
 }
 
+main {
+    padding: 3% 0 2%;
+}
+
 header {
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
     background-color: #2c2d25;
 }
 
@@ -48,7 +52,7 @@ header {
 }
 
 .carousel-inner {
-    max-height: 500px;
+    max-height: 600px;
 }
 
 .carousel-item {
@@ -175,6 +179,7 @@ label {
 .edit-listing-anchor:hover, .delete-btn:hover {
     color: linen;
     background-color: #550c20;
+    opacity: 1;
 }
 
 .user-listing-options form {
@@ -186,8 +191,6 @@ label {
     background-color: #811331;
 }
 
-
-
 textarea {
     display: block;
     border: none;
@@ -195,7 +198,6 @@ textarea {
     margin: 10px auto 40px;
     padding: 10px;
 }
-
 
 
 /* General elements */
@@ -226,6 +228,12 @@ img.full-image {
 
 .aw-title {
     font-style: italic;
+}
+
+.watcher-count-text {
+    color: #195953;
+    font-style: italic;
+    font-size: 12pt;
 }
 
 footer {

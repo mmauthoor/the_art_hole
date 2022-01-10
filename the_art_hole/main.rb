@@ -79,11 +79,13 @@ get "/artworks/:id" do
   artwork = OpenStruct.new(result)
   artwork_seller = OpenStruct.new(find_user_by_id(artwork.user_id))
   watch_status = find_watcher(current_user.id, params['id'])
+  watcher_number = get_watcher_count(artwork.id)
 
   erb(:artwork, locals: {
     artwork: artwork, 
     artwork_seller: artwork_seller,
-    is_watching: watch_status
+    is_watching: watch_status,
+    watcher_number: watcher_number
   })
 end
 
