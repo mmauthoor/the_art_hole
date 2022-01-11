@@ -11,7 +11,7 @@ body {
 }
 
 .mask {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.65);
     min-height: 100vh;
 }
 
@@ -31,7 +31,7 @@ h1 {
 h2 {
     font-family: 'Public Sans', sans-serif;
     font-size: 18pt;
-    color: rgba(233, 220, 201, 0.8);
+    color: rgba(233, 220, 201, 0.85);
     margin: 10px 0 5px;
 }
 
@@ -84,4 +84,8 @@ img {
 
 .aw-title {
     font-style: italic;
+}
+
+.opaque-text {
+    color: rgba(233, 220, 201, 1);
 }

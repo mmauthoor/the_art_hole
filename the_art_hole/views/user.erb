@@ -6,7 +6,9 @@
             <% if user_artworks.any?%>
                 <% user_artworks.each do | user_artwork |%>
                     <article class="user-aw-listing">
-                        <p><span class="aw-title"><%= user_artwork["title"] %></span>, <%= user_artwork["artist"] %></p>
+                        <p>
+                            <span class="aw-title"><%= user_artwork["title"] %></span>, <%= user_artwork["artist"] %>
+                        </p>
                         <a href="/artworks/<%= user_artwork["id"] %>">
                             <img class= "w-100 shadow-1-strong rounded mb-4" src="<%= user_artwork["image_url"] %>" alt="<%= user_artwork["title"] %>">
                         </a>
@@ -17,13 +19,16 @@
             <% end %>
         </section>
     </div>
+
     <div class="col-lg-5 col-md-12">
         <section>
             <h2>Watching</h2>
             <% if watched_artworks.any? %>
                 <% watched_artworks.each do | watched_artwork |%>
                     <article class="watched-aw">
-                        <p><span class="aw-title"><%= watched_artwork["title"] %></span>, <%= watched_artwork["artist"] %></p>
+                        <p>
+                            <span class="aw-title"><%= watched_artwork["title"] %></span>, <%= watched_artwork["artist"] %>
+                        </p>
                         <a href="/artworks/<%= watched_artwork["id"] %>">
                             <img class= "w-100 shadow-1-strong rounded mb-4" src="<%= watched_artwork["image_url"] %>" alt="<%= watched_artwork["title"] %>">
                         </a>
