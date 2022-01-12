@@ -1,7 +1,7 @@
 require "pg"
 
 def db_query(sql, params = [])
-    conn = PG.connect(ENV['DATABASE_URL'] || dbname: 'thearthole')
+    conn = PG.connect(ENV['DATABASE_URL'] || {dbname: 'thearthole'})
     result = conn.exec_params(sql, params)
     conn.close
     return result 
