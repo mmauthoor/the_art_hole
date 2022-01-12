@@ -20,6 +20,7 @@ def find_watched_artwork(user_id)
 end
 
 def get_watcher_count(artwork_id)
+    # would be better to do "select count(*) from watchers where artwork_id = $1". Then don't have to return result.count, just return the db_query. Note it'll be stored in an array because we're using PG - need to access first item. 
     sql = "SELECT * FROM watchers WHERE artwork_id = $1;"
     result = db_query(sql, [artwork_id])
     return result.count    

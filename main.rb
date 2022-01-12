@@ -1,11 +1,8 @@
 require "sinatra"
-# remove once code finalised
-require "sinatra/reloader"
+require "sinatra/reloader" if development?
 require "pg"
 require "bcrypt"
 require "cloudinary"
-# remove once code finalised
-require "pry"
 
 require_relative "models/artwork.rb"
 require_relative "models/user.rb"
@@ -76,6 +73,7 @@ get "/artworks/:id" do
     redirect "/"
   end
   
+  # would probably be easier to get these details through sql by joining tables
   artwork = OpenStruct.new(result)
   artwork_seller = OpenStruct.new(find_user_by_id(artwork.user_id))
   watch_status = find_watcher(current_user.id, params['id'])
